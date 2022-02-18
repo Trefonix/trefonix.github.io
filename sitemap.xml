@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://trefonix.github.io/posts/hello-world/</loc>
+    <loc>https://blog.alex-mccoy.uk/posts/hello-world/</loc>
     <lastmod>2022-02-18T13:40:09+00:00</lastmod>
   </url><url>
-    <loc>https://trefonix.github.io/posts/</loc>
+    <loc>https://blog.alex-mccoy.uk/posts/</loc>
     <lastmod>2022-02-18T13:40:09+00:00</lastmod>
   </url><url>
-    <loc>https://trefonix.github.io/</loc>
+    <loc>https://blog.alex-mccoy.uk/</loc>
     <lastmod>2022-02-18T13:40:09+00:00</lastmod>
   </url><url>
-    <loc>https://trefonix.github.io/categories/</loc>
+    <loc>https://blog.alex-mccoy.uk/categories/</loc>
   </url><url>
-    <loc>https://trefonix.github.io/tags/</loc>
+    <loc>https://blog.alex-mccoy.uk/tags/</loc>
   </url>
 </urlset>
