@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Email Spoofing: Abusing the SharePoint REST API - {name: &#39;Alex McCoy&#39;, siteType: &#39;Blog&#39;}</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Demonstration of how default SharePoint behaviour can be problematic if abused." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Email Spoofing: Abusing the SharePoint REST API" />
+<meta property="og:description" content="Demonstration of how default SharePoint behaviour can be problematic if abused." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.alex-mccoy.uk/posts/abusing-sharepoint-api/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-18T15:51:22+00:00" />
+<meta property="article:modified_time" content="2022-02-18T15:51:22+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Email Spoofing: Abusing the SharePoint REST API"/>
+<meta name="twitter:description" content="Demonstration of how default SharePoint behaviour can be problematic if abused."/>
+<script src="https://blog.alex-mccoy.uk/js/feather.min.js"></script>
+	
+	
+        <link href="https://blog.alex-mccoy.uk/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="https://blog.alex-mccoy.uk/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://blog.alex-mccoy.uk/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css"  disabled />
+	
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://blog.alex-mccoy.uk/">{name: &#39;Alex McCoy&#39;, siteType: &#39;Blog&#39;}</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All Posts</a>
+		
+		| <a id="dark-mode-toggle" onclick="toggleTheme()" href=""></a>
+		<script src="https://blog.alex-mccoy.uk/js/themetoggle.js"></script>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Email Spoofing: Abusing the SharePoint REST API</h1>
+			<div class="meta">Posted on Feb 18, 2022</div>
+		</div>
+		
+
+		<section class="body">
+			<h2 id="introduction">Introduction</h2>
+<p>Famously, Microsoft loves to make out that they love developers <em>(developers, developers, developers)</em>. Maybe it&rsquo;s this love of developers that spurred them to implement a generous range of features into their SharePoint RESI API, with the intention of enabling custom web-apps to extend default functionality.</p>
+<p>One day, I was looking through the documentation for the <a href="https://pnp.github.io/pnpjs/getting-started/">PnP SharePoint Library</a> (as you do), and I noticed a feature labelled &lsquo;sendEmail&rsquo;. On closer inspection, this feature allows you to send an email to anybody inside your Microsoft 365 tenancy with an arbitrary sender &lsquo;name&rsquo; (the actual sending address is <code>no-reply@sharepointonline.com</code>), subject and HTML-enabled body.</p>
+<h2 id="turning-theory-into-practice">Turning Theory into Practice</h2>
+<p>To call the PnP library function, I created a <a href="https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part">SharePoint custom web part project</a>. The function to send the email is called with the simple code below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">sendEmail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> () <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#75715e">// Make request to REST API to send email
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">sp</span>.<span style="color:#a6e22e">utility</span>.<span style="color:#a6e22e">sendEmail</span>({
+        <span style="color:#a6e22e">To</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;EMAIL HERE&#34;</span>],
+        <span style="color:#a6e22e">Subject</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;SharePoint REST API Fun&#34;</span>,
+        <span style="color:#a6e22e">Body</span><span style="color:#f92672">:</span> <span style="color:#e6db74">`
+</span><span style="color:#e6db74">            &lt;h1&gt;This could be a convincing phishing email!&lt;/h1&gt;
+</span><span style="color:#e6db74">            &lt;br&gt;&lt;br&gt;
+</span><span style="color:#e6db74">            &lt;button type=&#34;button&#34;&gt;malicious payload here&lt;/button&gt;
+</span><span style="color:#e6db74">        `</span>,
+        <span style="color:#a6e22e">AdditionalHeaders</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#34;content-type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;text/html&#34;</span>
+        },
+        <span style="color:#75715e">// Optional. If blank it will display name of SharePoint Group.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Can spoof any name in the tenancy.
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">From</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;EMAIL HERE&#34;</span>
+    });
+};
+</code></pre></div><p>Many SharePoint sites allow you to access something called a &lsquo;workbench&rsquo; to test locally hosted web-apps. You can access this by navigating to a SharePoint site that you are part of, and entering the URL:</p>
+<blockquote>
+<p>[YourTenancy].sharepoint.com/sites/[YourSite]/_layouts/15/workbench.aspx
+Run the &lsquo;gulp serve&rsquo; task to locally host the web-app, then trigger the function.</p>
+</blockquote>
+<p>This results in an email sent to the &lsquo;to&rsquo; address, and conveniently does not get picked up by any of Microsoft&rsquo;s spam filtering as a bonus.</p>
+<p><img src="/abusing-sharepoint-api/payload-demo-sc.png" alt="Image">
+In the above screenshot, I used my own address in both the sending and recipient address.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>With the right payload, I expect this technique could be quite effective as part of a targeted phishing campaign, or simply for workplace mischief. But consider - with this you can send emails from <code>no-reply@sharepointonline.com</code>—which is coincidentially the same address security alerts originate from—to SharePoint admins.</p>
+<p>In any case, if I was a SharePoint admin, this is something I would investigate means to prevent on my tenancy.</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/Trefonix" title="GitHub"><i data-feather="github"></i></a><a class="soc" href="https://twitter.com/alexmccoy41/" title="Twitter"><i data-feather="twitter"></i></a></div>
+  <div class="footer-info">
+    2022  © Alex McCoy |  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | <a href="https://gohugo.io">Hugo</a> is pretty cool, check it out!
+  </div>
+</footer>
+
+
+<script>
+  feather.replace()
+</script></div>
+    </body>
+</html>

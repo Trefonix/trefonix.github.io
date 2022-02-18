@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Alex McCoy</copyright>
-    <lastBuildDate>Fri, 18 Feb 2022 13:40:09 +0000</lastBuildDate><atom:link href="https://blog.alex-mccoy.uk/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Feb 2022 15:51:22 +0000</lastBuildDate><atom:link href="https://blog.alex-mccoy.uk/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Email Spoofing: Abusing the SharePoint REST API</title>
+      <link>https://blog.alex-mccoy.uk/posts/abusing-sharepoint-api/</link>
+      <pubDate>Fri, 18 Feb 2022 15:51:22 +0000</pubDate>
+      
+      <guid>https://blog.alex-mccoy.uk/posts/abusing-sharepoint-api/</guid>
+      <description>Introduction Famously, Microsoft loves to make out that they love developers (developers, developers, developers). Maybe it&amp;rsquo;s this love of developers that spurred them to implement a generous range of features into their SharePoint RESI API, with the intention of enabling custom web-apps to extend default functionality.
+One day, I was looking through the documentation for the PnP SharePoint Library (as you do), and I noticed a feature labelled &amp;lsquo;sendEmail&amp;rsquo;. On closer inspection, this feature allows you to send an email to anybody inside your Microsoft 365 tenancy with an arbitrary sender &amp;lsquo;name&amp;rsquo; (the actual sending address is no-reply@sharepointonline.</description>
+    </item>
+    
     <item>
       <title>Hello, World!</title>
       <link>https://blog.alex-mccoy.uk/posts/hello-world/</link>
