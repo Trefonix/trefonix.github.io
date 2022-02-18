@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{name: &#39;Alex McCoy&#39;, siteType: &#39;Blog&#39;}</title>
+    <link>http://example.org/</link>
+    <description>Recent content on {name: &#39;Alex McCoy&#39;, siteType: &#39;Blog&#39;}</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Alex McCoy</copyright>
+    <lastBuildDate>Fri, 18 Feb 2022 13:40:09 +0000</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello, World!</title>
+      <link>http://example.org/posts/hello-world/</link>
+      <pubDate>Fri, 18 Feb 2022 13:40:09 +0000</pubDate>
+      
+      <guid>http://example.org/posts/hello-world/</guid>
+      <description>Having been in the back of my mind for at least 3 years, it&amp;rsquo;s good to finally have my own space for publishing my technical pieces on the internet.
+I&amp;rsquo;m not anticipating posting regularly - I expect I will only post when I have something to share as opposed to working to any schedule.
+Anyway, I suppose I ought to get to writing the first real blog post. Feedback is always appreciated and I would suggest tweeting me at @AlexMcCoy41.</description>
+    </item>
+    
+  </channel>
+</rss>
