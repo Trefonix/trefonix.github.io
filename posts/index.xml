@@ -7,7 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Alex McCoy</copyright>
-    <lastBuildDate>Fri, 18 Feb 2022 15:51:22 +0000</lastBuildDate><atom:link href="https://blog.alex-mccoy.uk/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 May 2022 12:01:05 +0100</lastBuildDate><atom:link href="https://blog.alex-mccoy.uk/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Books You Might Want to Read</title>
+      <link>https://blog.alex-mccoy.uk/posts/books-you-might-want-to-read/</link>
+      <pubDate>Wed, 11 May 2022 12:01:05 +0100</pubDate>
+      
+      <guid>https://blog.alex-mccoy.uk/posts/books-you-might-want-to-read/</guid>
+      <description>Preamble I often get asked &amp;lsquo;what books do you recommend for [insert topic here]&amp;rsquo;, so I thought I&amp;rsquo;d write down in one place the books that I&amp;rsquo;ve so-far read and think are of value. I&amp;rsquo;ll keep this page updated with whatever books I think deserve adding.
+Fair warning, I&amp;rsquo;ve become a bit of a No Starch Press fanboy.
+The Books Title: Real World Bug Hunting
+ISBN-13: 978-1-59327-861-8
+Link: https://nostarch.com/bughunting
+Review: The subject of bug bounty can sometimes be perceived as a black box, within the purview only of tech wizards who no-doubt dream in jargon.</description>
+    </item>
+    
     <item>
       <title>Email Spoofing: Abusing the SharePoint REST API</title>
       <link>https://blog.alex-mccoy.uk/posts/abusing-sharepoint-api/</link>
